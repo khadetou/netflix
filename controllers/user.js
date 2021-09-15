@@ -34,14 +34,18 @@ export const updateUser = asyncHandler(async (req, res) => {
 
 export const deletUser = asyncHandler(async (req, res) => {
   const { id } = req.query;
-  const user = await User.findById(id);
-  if (!user) {
-    res.status(404);
-    throw Error("User not found");
+  if (req.user._id === id || req.user.isAdmin) {
+    const user = await User.findById(id);
+    if (!user) {
+      res.status(404);
+      throw Error("User not found");
+    }
+    await user.remove();
+    res.json({ message: "User removed successfully!" });
+  } else {
+    res.status(401);
+    res.json({ message: "Unthorized! " });
   }
-
-  await user.remove();
-  res.json({ message: "User removed successfully!" });
 });
 
 //@Desc get All Users

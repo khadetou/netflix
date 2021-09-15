@@ -13,6 +13,7 @@ import { isAuthenticated, isAdmin } from "@/middlewares/auth";
 const handler = nc({ onError });
 connectDB();
 
-handler.get(getUser);
-handler.use(isAuthenticated).get(getAllUsers).delete(deletUser);
+handler.get(getUser).put(updateUser);
+handler.use(isAuthenticated, isAdmin).get(getAllUsers).get(getUserStat);
+handler.use(isAuthenticated).delete(deletUser);
 export default handler;

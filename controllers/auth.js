@@ -1,6 +1,6 @@
 import User from "@/models/User";
 import bcryptjs from "bcryptjs";
-import asyncHandler from "express-async-handler";
+import asyncHandler from "@/middlewares/asyncHandler";
 
 //@Desc register user
 //@Route Post/api/auth/register

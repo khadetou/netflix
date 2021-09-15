@@ -19,7 +19,7 @@ const MovieSchema = new mongoose.Schema(
     imgSm: {
       type: String,
     },
-    trailer: {
+    trailler: {
       type: String,
     },
     video: {

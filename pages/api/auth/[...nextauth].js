@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import Providers from "next-aut/providers";
+import Providers from "next-auth/providers";
 import User from "@/models/User";
 import connectDB from "config/dbConnect";
 import bcryptjs from "bcryptjs";

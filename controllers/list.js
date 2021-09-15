@@ -40,6 +40,35 @@ export const deletList = asyncHandler(async (req, res) => {
 //@Access public
 
 export const getList = asyncHandler(async (req, res) => {
-  const list = await List.find();
+  const { type, genre } = req.query;
+  let list = [];
+  if (type) {
+    if (genre) {
+      list = await List.aggregate([
+        {
+          $sample: { size: 10 },
+        },
+        {
+          $match: { type, genre },
+        },
+      ]);
+    } else {
+      list = await List.aggregate([
+        {
+          $sample: { size: 10 },
+        },
+        {
+          $match: { type },
+        },
+      ]);
+    }
+  } else {
+    list = await List.aggregate([
+      {
+        $sample: { size: 10 },
+      },
+    ]);
+  }
+
   res.json(list);
 });

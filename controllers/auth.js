@@ -9,7 +9,6 @@ export const registerUser = asyncHandler(async (req, res) => {
   let { name, email, password } = req.body;
 
   let user = await User.findOne({ email });
-
   if (user) {
     throw Error("A user with this email already exist!");
   }

@@ -1,9 +1,10 @@
 import styles from "@/styles/style.module.scss";
 import { useState } from "react";
-import { signIn } from "next-auth/client";
+import { signIn, signOut } from "next-auth/client";
 import router, { useRouter } from "next/router";
 import { getSession } from "next-auth/client";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function Login() {
   const { login, login__container, login__logo, login__wrapper } = styles;
@@ -21,6 +22,7 @@ export default function Login() {
       email,
       password,
     });
+
     setLoading(false);
 
     if (result.error) {
@@ -59,7 +61,10 @@ export default function Login() {
             Sign In
           </button>
           <span>
-            New to Netflix? <b>Sign up now.</b>
+            New to Netflix?{" "}
+            <Link href="/client/register">
+              <b style={{ cursor: "pointer" }}>Sign up now.</b>
+            </Link>
           </span>
           <small>
             This page is protected by Google reCAPTCHA to ensure you're not a
@@ -73,15 +78,15 @@ export default function Login() {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+  console.log(session);
+  // if (session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   return {
     props: {},

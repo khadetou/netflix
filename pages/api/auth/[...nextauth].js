@@ -6,7 +6,9 @@ import bcryptjs from "bcryptjs";
 
 export default NextAuth({
   session: {
-    jwt: true,
+    jwt: {
+      signingKey: process.env.JWT,
+    },
   },
 
   providers: [
@@ -22,6 +24,7 @@ export default NextAuth({
 
         //Find use in database
         const user = await User.findOne({ email }).select("+password");
+
         if (!user) {
           throw new Error("Invalid Email or Password");
         }

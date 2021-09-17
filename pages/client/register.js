@@ -6,6 +6,7 @@ import { registration } from "@/redux/actions/auth";
 import { CLEART_ERROR } from "@/redux/types/type";
 import Link from "next/link";
 import router from "next/router";
+import { getSession } from "next-auth/client";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -29,6 +30,7 @@ export default function Register() {
     register__input,
     register__registerButton,
     register__form,
+    register__top,
   } = styles;
 
   useEffect(() => {
@@ -58,18 +60,16 @@ export default function Register() {
   };
   return (
     <div className={register}>
-      <div className="top">
+      <div className={register__top}>
         <div className={register__wrapper}>
           <img
             className={register__logo}
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
             alt=""
           />
-          <button className={register__loginButton}>
-            <Link href="/client/login">
-              <a>Sign In</a>
-            </Link>
-          </button>
+          <Link href="/client/login">
+            <button className={register__loginButton}>Sign In</button>
+          </Link>
         </div>
       </div>
       <div className={register__container}>
@@ -114,4 +114,21 @@ export default function Register() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }

@@ -1,0 +1,88 @@
+.navbar {
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+
+  &__scrolled {
+    background-color: $mainColor;
+  }
+
+  &__img {
+    @include responsive(mobile) {
+      display: none !important;
+    }
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-right: 20px;
+      cursor: pointer;
+
+      &:nth-child(2) {
+        margin-left: 40px;
+      }
+
+      @include responsive(tablet) {
+        display: none;
+      }
+
+      &.navbarmainLinks {
+        @include responsive(tablet) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__icon {
+    margin: 0px 15px;
+    cursor: pointer;
+  }
+  &__profile {
+    span {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    &:hover {
+      .navbar__options {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+      }
+    }
+  }
+
+  &__options {
+    display: none;
+    background-color: var(--main-color);
+    border-radius: 5px;
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    width: 30px;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+  &__container {
+    padding: 0px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+}

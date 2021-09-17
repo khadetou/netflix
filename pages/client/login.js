@@ -1,7 +1,7 @@
 import styles from "@/styles/style.module.scss";
 import { useState } from "react";
-import { signIn, signOut } from "next-auth/client";
-import router, { useRouter } from "next/router";
+import { signIn } from "next-auth/client";
+import { useRouter } from "next/router";
 import { getSession } from "next-auth/client";
 import { toast } from "react-toastify";
 import Link from "next/link";
@@ -78,15 +78,15 @@ export default function Login() {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
-  console.log(session);
-  // if (session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {},

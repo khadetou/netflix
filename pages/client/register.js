@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registration } from "@/redux/actions/auth";
-import { CLEART_ERROR } from "@/redux/types/type";
+import { CLEAR_ERROR } from "@/redux/types/type";
 import Link from "next/link";
 import router from "next/router";
 import { getSession } from "next-auth/client";
@@ -36,7 +36,7 @@ export default function Register() {
   useEffect(() => {
     if (error) {
       toast.error(error);
-      dispatch({ type: CLEART_ERROR });
+      dispatch({ type: CLEAR_ERROR });
     }
     if (registerState) {
       router.push("/client/login");

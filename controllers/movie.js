@@ -6,6 +6,7 @@ import asyncHandler from "@/middlewares/asyncHandler";
 //@Protect user is admin
 
 export const createMovie = asyncHandler(async (req, res) => {
+  console.log("object");
   const {
     title,
     desc,
@@ -37,27 +38,20 @@ export const createMovie = asyncHandler(async (req, res) => {
   res.json(savedMovie);
 });
 
-//@Desc Get all movie
-//@route Get/api/movie/:id
-//@Protect user is admin
-export const getAllMovie = asyncHandler(async (req, res) => {
-  const movies = await Movie.find();
-  res.json(movies);
-});
-
-//@Desc Get all movie
+//@Desc Get all movie and reverse the data in
+//order to get the most recent one
 //@route Get/api/movie
 //@Protect user is admin
 export const getAllMovie = asyncHandler(async (req, res) => {
   const movies = await Movie.find();
-  res.json(movies);
+  res.json(movies.reverse());
 });
 
 //@Desc get Movie
 //@Route get/api/movie
 
 export const getMovie = asyncHandler(async (req, res) => {
-  const movie = await Movie.findById(req.user._id);
+  const movie = await Movie.findById(req.query.id);
   if (!movie) {
     res.status(404);
     throw Error("No Movie with that id was found");
@@ -124,11 +118,12 @@ export const deletMovie = asyncHandler(async (req, res) => {
   res.json({ message: "Movie removed successfully!" });
 });
 
-//@Desc get random Movie
+//@Desc It gives you one random movie
 //@route Get/api/random
 //@Access private
 export const getRandomMovie = asyncHandler(async (req, res) => {
   const { type } = req.query;
+  console.log(type);
   let movie;
   if (type === "series") {
     movie = await Movie.aggregate([

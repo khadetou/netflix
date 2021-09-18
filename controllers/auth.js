@@ -27,6 +27,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 //@Route get/api/user
 
 export const getUser = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
   const user = await User.findById(req.user._id);
 
   res.status(200).json(user);

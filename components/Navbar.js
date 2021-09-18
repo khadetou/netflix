@@ -57,8 +57,9 @@ const Navbar = () => {
           <Image
             src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
-            width={504}
-            height={756}
+            width={30}
+            height={30}
+            objectFit="cover"
           />
           <div className={navbar__profile}>
             <FiChevronDown className={navbar__icon} />

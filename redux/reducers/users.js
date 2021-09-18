@@ -1,50 +1,46 @@
 import {
   CLEAR_ERROR,
-  CLEART_SUCCESS,
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  SET_REGISTER_LOADING,
+  GET_USER_FAIL,
+  GET_USER_SUCCESS,
+  SET_LOADING_USER,
 } from "../types/type";
 
 const initialState = {
-  register: null,
+  user: null,
+  users: null,
   error: null,
   loading: null,
 };
 
-export const register = (state = initialState, action) => {
+export const Users = (state = initialState, action) => {
   const { payload, type } = action;
+
   switch (type) {
-    case REGISTER_SUCCESS:
+    case GET_USER_SUCCESS:
       return {
         ...state,
-        register: payload,
+        user: payload,
         loading: false,
       };
-    case REGISTER_FAIL:
+    case GET_USER_FAIL:
       return {
         ...state,
         error: payload,
         loading: false,
       };
 
+    case SET_LOADING_USER:
+      return {
+        ...state,
+        loading: true,
+      };
+
     case CLEAR_ERROR:
       return {
         ...state,
         error: null,
-        loading: false,
       };
 
-    case CLEART_SUCCESS:
-      return {
-        ...state,
-        register: null,
-        loading: false,
-      };
-    case SET_REGISTER_LOADING:
-      return {
-        loading: true,
-      };
     default:
       return {
         ...state,

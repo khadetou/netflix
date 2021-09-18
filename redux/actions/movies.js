@@ -1,4 +1,3 @@
-import { getMovie } from "@/controllers/movie";
 import axios from "axios";
 import {
   GET_MOVIES_FAIL,

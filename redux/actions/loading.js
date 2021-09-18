@@ -1,4 +1,5 @@
 import {
+  SET_LOADING_LIST,
   SET_LOADING_MOVIE,
   SET_LOADING_USER,
   SET_REGISTER_LOADING,
@@ -17,5 +18,11 @@ export const setLoadingUser = () => (dispatch) => {
 export const setLoadingMovie = () => (dispatch) => {
   dispatch({
     type: SET_LOADING_MOVIE,
+  });
+};
+
+export const setLoadingList = () => (dispatch) => {
+  dispatch({
+    type: SET_LOADING_LIST,
   });
 };

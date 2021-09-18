@@ -7,7 +7,7 @@ import { isAuthenticated, isAdmin } from "@/middlewares/auth";
 const handler = nc({ onError });
 connectDB();
 
-handler.get(getList);
+handler.use(isAuthenticated).get(getList);
 handler.use(isAuthenticated, isAdmin).post(createList);
 
 export default handler;
